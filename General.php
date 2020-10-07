@@ -48,8 +48,13 @@ class General {
         $values = substr($values, 0, -2) . ")";
 
         $statement .= $values;
-        var_dump($statement);
-        // $this->db->prepare($statement, "save", $param);
+
+        $data = array();
+        foreach ($param as $key => $value) {
+            $data[$key] = htmlspecialchars($value);
+        }
+
+        $this->db->prepare($statement, "save", $data);
     }
 
     /**

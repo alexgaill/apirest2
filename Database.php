@@ -47,11 +47,8 @@ class Database {
     public function prepare($statement, $action, $param = array()){
         try {
             $state = $this->pdo->prepare($statement);
-            $data = array();
-            foreach ($param as $key => $value) {
-                $data[$key] = htmlspecialchars($value);
-            }
-            $state->execute($data);
+
+            $state->execute($param);
 
             if ($action === "save") {
                 $message = "Données enregistrées";
