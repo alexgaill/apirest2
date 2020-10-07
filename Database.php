@@ -38,6 +38,30 @@ class Database {
     }
 
     /**
+     * Get informations from Db
+     *
+     * @param string $statement
+     * @param boolean $one
+     */
+    public function queryReturn ($statement, $one=false)
+    {
+        try {
+            $state = $this->pdo->query($statement, PDO::FETCH_OBJ);
+            
+            if ($one) {   
+                $data = $state->fetch();
+            } else {
+                $data = $state->fetchAll();
+            }
+
+            return $data;
+        } catch (\Throwable $th) {
+            $this->app->sendData(" Erreur lors de la récupération des informations");
+           
+        }
+    }
+
+    /**
      * Save data in Db
      *
      * @param string $statement

@@ -23,4 +23,13 @@ class Client extends General {
 
         $this->db->prepare($statement, 'save', $param);
     }
+
+    public function connexion ($param){
+        $statement = "SELECT * FROM client WHERE username='".$param["username"]."'";
+        $user = $this->db->queryReturn($statement, true);
+        if (password_verify($param["password"], $user->password)) {
+            $this->app->sendData("connexion réussie", true, $user->secret_api_key);
+        }
+
+    }
 }

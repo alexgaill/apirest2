@@ -1,6 +1,7 @@
 <?php
 
 class App {
+
     /**
      * Send data to client
      *

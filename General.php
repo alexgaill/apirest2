@@ -10,6 +10,7 @@ class General {
     public function __construct()
     {
         $this->db = new Database();
+        $this->app = new App();
         // $this->table = strtolower($this->table);
     }
     /**
@@ -90,5 +91,11 @@ class General {
         $statement = substr($statement, 0,-2);
         $statement .= " WHERE id=$id";
         $this->db->prepare($statement, "put", $data);
+    }
+
+    public function getRole($apiKey)
+    {
+       $role = $this->db->queryReturn("SELECT role FROM client WHERE secret_api_key = '$apiKey'", true);
+       return json_decode($role->role);
     }
 }
